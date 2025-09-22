@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>School Management</title>
+    <link rel="stylesheet" href="/style.css"> <!-- Optional -->
+
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    background: #f9f9f9;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+form input, form button {
+    margin: 5px;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+    </style>
+</head>
+<body>
+    <h1>School Management System</h1>
+
+    <form action="/add" method="POST">
+        <input type="text" name="studentID" placeholder="Student ID" required>
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="favoriteSubject" placeholder="Favorite Subject" required>
+        <input type="text" name="number" placeholder="Phone Number" required>
+        <button type="submit">Add Student</button>
+    </form>
+
+    <h2>All Students</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Favorite Subject</th>
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% students.forEach(function(student) { %>
+                <tr>
+                    <td><%= student.studentID %></td>
+                    <td><%= student.name %></td>
+                    <td><%= student.favoriteSubject %></td>
+                    <td><%= student.number %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>
