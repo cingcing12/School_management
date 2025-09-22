@@ -37,15 +37,24 @@ app.get('/', async (req, res) => {
 // Post route to add a new student
 app.post('/add', async (req, res) => {
     const { studentID, name, favoriteSubject, number } = req.body;
-    const student = new Student({ studentID, name, favoriteSubject, number });
 
     try {
+        // Check if studentID already exists
+        const existingStudent = await Student.findOne({ studentID });
+        if (existingStudent) {
+            return res.status(400).send('Student with this ID already exists.');
+        }
+
+        const student = new Student({ studentID, name, favoriteSubject, number });
         await student.save();
         res.redirect('/');
     } catch (error) {
+        console.error("Error saving student:", error);
         res.status(500).send('Error saving student');
     }
 });
+
+
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
